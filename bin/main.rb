@@ -33,24 +33,43 @@ board = [] # Sample tic tac toe board
 
 turn_p1 = []
 turn_p2 = []
-win = false
-until win
+game_on = true
+def valid_move
+  true
+end
+
+def draw
+  false
+end
+
+def who_won
+  win = 0 # 0 means no one won
+  if win == 1
+    puts 'Player 1 is the winner'
+    break
+  elsif win == 2
+    puts 'Player 2 is the winner'
+    break
+  elsif draw
+    win = 3 # 3 means draw
+    puts 'Its a draw'
+    break
+  end
+  win
+end
+
+while game_on
   puts 'Enter your choice (player 1) '
   turn_p1.push(gets.chomp.to_i)
   # check if move is valid
+  puts 'Invalid move' unless valid_move
   print_board(board)
-  # Check if player one has won
-  if win == 1
-    puts 'Player 1 wins'
-    break
-  end
+  who_won # Check if move is a winning move or a draw
   puts 'Enter your choice (player 2)'
   turn_p2.push(gets.chomp.to_i)
   # check if move is valid
+  puts 'Invalid move' unless valid_move
   print_board(board)
-  # Check if player two has won
-  if win == 2
-    puts 'Player 2 wins'
-    break
-  end
+  who_won # Check if move is a winning move or a draw
+  game_on = false unless who_won.zero?
 end
