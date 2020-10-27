@@ -22,22 +22,21 @@ class Gameplay
   end
 
   def who_won
+    return_value = 0
     horizontal = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
     vertical = [[0, 3, 6], [1, 4, 7], [2, 5, 8]]
     diagonal = [[0, 4, 8], [2, 4, 6]]
     winning_combo = [horizontal, vertical, diagonal].flatten(1)
     winning_combo.each do |combo|
-      puts "Combo is #{combo}"
       if combo.all? { |position| @board[position].eql? 'x' } # Checking if 'x' has won
         return 1
       elsif combo.all? { |position| @board[position].eql? 'o' } # Checking if 'o' has won
         return 2
-      elsif combo.all? { |position| !@board[position].zero? } # Checking for a draw
+      elsif @board.all? { |element| element.is_a? String } # Checking for a draw
         return 3
-      else
-        return 0
       end
     end
+    return_value
   end
 
   def print_board
@@ -53,14 +52,14 @@ class Gameplay
 end
 
 test = Gameplay.new
-puts test.valid_move(3)
 test.update_board(3, 'x')
 test.update_board(1, 'o')
 test.update_board(2, 'x')
-test.update_board(4, 'o')
-test.update_board(5, 'x')
-test.update_board(9, 'o')
 test.update_board(7, 'o')
+test.update_board(5, 'x')
+test.update_board(8, 'o')
+test.update_board(4, 'x')
+test.update_board(6, 'o')
 test.print_board
 
-who_won
+puts test.who_won
