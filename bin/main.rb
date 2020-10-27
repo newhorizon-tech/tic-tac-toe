@@ -1,18 +1,21 @@
 #!/usr/bin/env ruby
+require_relative '../lib/player.rb'
+require_relative '../lib/gameplay.rb'
 
-def input_player
+
   print 'Enter your name player 1: '
-  p1 = gets.chomp
+  p1_name = gets.chomp
+  p1 = Player.new(p1_name, 'x')
+
   puts
   print 'Enter your name player 2: '
-  p2 = gets.chomp
-  [p1, p2]
-end
+  p2_name = gets.chomp
+  p2 = Player.new(p2_name, 'o')
 
-def print_player(list)
-  puts
-  puts "Player 1 is #{list[0]}"
-  puts "Player 2 is #{list[1]}"
+
+def print_player
+  puts "Player 1 is #{p1.player_name} and symbol is #{p1.player_symbol}"
+  puts "Player 2 is #{p2.player_name} and symbol is #{p2.player_symbol} "
 end
 
 def print_board(input)
@@ -25,51 +28,50 @@ def print_board(input)
   puts ' - - -'
 end
 
-player_list = input_player
-print_player(player_list)
 
-board = [] # Sample tic tac toe board
-9.times { board.push(0) }
-
-turn_p1 = []
-turn_p2 = []
+print_player
 game_on = true
-def valid_move
-  true
-end
-
-def draw
-  false
-end
-
+game = Gameplay.new
 def who_won
-  win = 0 # 0 means no one won
+  win = game.who_won
+  game_on = false unless win.zero?  
   if win == 1
     puts 'Player 1 is the winner'
-    break
   elsif win == 2
     puts 'Player 2 is the winner'
-    break
-  elsif draw
-    win = 3 # 3 means draw
+  elsif win == 3
     puts 'Its a draw'
-    break
   end
-  win
 end
 
 while game_on
   puts 'Enter your choice (player 1) '
-  turn_p1.push(gets.chomp.to_i)
-  # check if move is valid
+  turn_p1 = gets.chomp.to_i
+  turn_valid_p1 = game.valid_move(turn_p1)
+  if turn_valid_p1[0]
+    game.update_board(turn_p1, p1.player_symbol)
+  else
+    puts "Invalid move"
+    puts turn_valid_p1[1]
+  end
+
   puts 'Invalid move' unless valid_move
   print_board(board)
-  who_won # Check if move is a winning move or a draw
+  who_won 
+  if !game_on 
+    break
+  end
   puts 'Enter your choice (player 2)'
-  turn_p2.push(gets.chomp.to_i)
-  # check if move is valid
-  puts 'Invalid move' unless valid_move
-  print_board(board)
-  who_won # Check if move is a winning move or a draw
-  game_on = false unless who_won.zero?
+  turn_p2 = gets.chomp.to_i
+  turn_valid_p2 = game.valid_move(turn_p2)
+  if turn_valid_p2[0]
+    game.update_board(turn_p2, p2.player_symbol)
+  else
+    puts "Invalid move"
+    puts turn_valid_p2[1]
+  end
+  
+  print_board(game.board)
+  who_won 
+  
 end
