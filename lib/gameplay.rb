@@ -39,6 +39,7 @@ class Gameplay
       end
     end
     return 3 if !win and @board.all? { |element| element.is_a? String } # Checking for a draw
+
     return_value
   end
 end
