@@ -24,15 +24,11 @@ class Gameplay
 
   def check_winner(winning_combo)
     winning_combo.each do |combo|
-      if combo.all? { |position| @board[position].eql? 'x' } # Checking if 'x' has won
-        return_value = 1
-        return return_value
-      elsif combo.all? { |position| @board[position].eql? 'o' } # Checking if 'o' has won
-        return_value = 2
-        return return_value
-      end
+      return 1 if combo.all? { |position| @board[position].eql? 'x' } # Checking if 'x' has won
+
+      return 2 if combo.all? { |position| @board[position].eql? 'o' } # Checking if 'o' has won
     end
-    0
+    0 # Return 0 if no one has won
   end
 
   def board_full
