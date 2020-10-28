@@ -3,22 +3,22 @@ require_relative '../lib/player.rb'
 require_relative '../lib/gameplay.rb'
 
 print 'Enter your name player 1: '
-p1_name = gets.chomp
-p1 = Player.new(p1_name, 'x')
+play1_name = gets.chomp
+play1 = Player.new(play1_name, 'x')
 
 print 'Enter your name player 2: '
-p2_name = gets.chomp
-p2 = Player.new(p2_name, 'o')
+play2_name = gets.chomp
+play2 = Player.new(play2_name, 'o')
 
-def print_player(p1, p2)
+def print_player(play1, play2)
   puts '*' * 40
   puts 'Player information'
-  puts "Player 1 is #{p1.player_name} and symbol is #{p1.player_symbol}"
-  puts "Player 2 is #{p2.player_name} and symbol is #{p2.player_symbol} "
+  puts "Player 1 is #{play1.player_name} and symbol is #{play1.player_symbol}"
+  puts "Player 2 is #{play2.player_name} and symbol is #{play2.player_symbol} "
   puts '*' * 40
 end
 
-print_player(p1, p2)
+print_player(play1, play2)
 
 def print_board(board_arr)
   input = []
@@ -67,38 +67,39 @@ end
 
 while game_on
   puts '-' * 40
-  puts "Enter your choice, #{p1.player_name} "
-  turn_p1 = gets.chomp.to_i
-  turn_valid_p1 = game.valid_move(turn_p1)
-  if turn_valid_p1[0]
-    game.update_board(turn_p1, p1.player_symbol)
+  puts "Enter your choice, #{play1.player_name} "
+  turn_play1 = gets.chomp.to_i
+  turn_valid_play1 = game.valid_move(turn_play1)
+  if turn_valid_play1[0]
+    game.update_board(turn_play1, play1.player_symbol)
   else
     puts 'Invalid move'
-    puts turn_valid_p1[1]
-    until turn_valid_p1[0]
-      puts "Enter your choice again, #{p1.player_name}. Make sure it's a valid choice "
-      turn_p1 = gets.chomp.to_i
-      turn_valid_p1 = game.valid_move(turn_p1)
+    puts turn_valid_play1[1]
+    until turn_valid_play1[0]
+      puts "Enter your choice again, #{play1.player_name}. Make sure it's a valid choice "
+      turn_play1 = gets.chomp.to_i
+      turn_valid_play1 = game.valid_move(turn_play1)
     end
-    game.update_board(turn_p1, p1.player_symbol) if turn_valid_p1[0]
+    game.update_board(turn_play1, play1.player_symbol) if turn_valid_play1[0]
   end
   print_board(game.board)
   game_on = who_won(game, game_on)
   break unless game_on
-  puts "Enter your choice, #{p2.player_name} "
-  turn_p2 = gets.chomp.to_i
-  turn_valid_p2 = game.valid_move(turn_p2)
-  if turn_valid_p2[0]
-    game.update_board(turn_p2, p2.player_symbol)
+
+  puts "Enter your choice, #{play2.player_name} "
+  turn_play2 = gets.chomp.to_i
+  turn_valid_play2 = game.valid_move(turn_play2)
+  if turn_valid_play2[0]
+    game.update_board(turn_play2, play2.player_symbol)
   else
     puts 'Invalid move'
-    puts turn_valid_p2[1]
-    until turn_valid_p2[0]
-      puts "Enter your choice again, #{p2.player_name}. Make sure it's a valid choice "
-      turn_p2 = gets.chomp.to_i
-      turn_valid_p2 = game.valid_move(turn_p2)
+    puts turn_valid_play2[1]
+    until turn_valid_play2[0]
+      puts "Enter your choice again, #{play2.player_name}. Make sure it's a valid choice "
+      turn_play2 = gets.chomp.to_i
+      turn_valid_play2 = game.valid_move(turn_play2)
     end
-    game.update_board(turn_p2, p2.player_symbol) if turn_valid_p2[0]
+    game.update_board(turn_play2, play2.player_symbol) if turn_valid_play2[0]
   end
   print_board(game.board)
   game_on = who_won(game, game_on)
