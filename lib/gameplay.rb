@@ -1,4 +1,5 @@
 class Gameplay
+  attr_reader :board
   def initialize
     @board = []
     9.times { @board.push(0) }
@@ -10,7 +11,7 @@ class Gameplay
     if move < 1 or move > 9
       valid = false
       error = 'Number is not between 0 and 9'
-    elsif !@board[move - 1].zero?
+    elsif @board[move - 1].is_a? String
       valid = false
       error = 'The cell is not empty'
     end
@@ -28,9 +29,7 @@ class Gameplay
     vertical = [[0, 3, 6], [1, 4, 7], [2, 5, 8]]
     diagonal = [[0, 4, 8], [2, 4, 6]]
     winning_combo = [horizontal, vertical, diagonal].flatten(1).freeze
-    puts "Winning combo is #{winning_combo}"
     winning_combo.each do |combo|
-      puts "Combo is #{combo}"
       if combo.all? { |position| @board[position].eql? 'x' } # Checking if 'x' has won
         win = true
         return 1
@@ -55,16 +54,8 @@ class Gameplay
   end
 end
 
-test = Gameplay.new
-test.update_board(3, 'x')
-test.update_board(1, 'o')
-test.update_board(2, 'x')
-test.update_board(7, 'o')
-test.update_board(5, 'x')
-test.update_board(8, 'o')
-test.update_board(9, 'o')
-test.update_board(4, 'x')
-test.update_board(6, 'o')
-test.print_board
-
-puts test.who_won
+# test = Gameplay.new
+# test.update_board(3, 'x')
+# test.print_board
+#
+# puts test.who_won
