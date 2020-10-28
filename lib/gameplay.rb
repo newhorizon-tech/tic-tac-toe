@@ -41,21 +41,4 @@ class Gameplay
     return 3 if !win and @board.all? { |element| element.is_a? String } # Checking for a draw
     return_value
   end
-
-  def print_board
-    puts '-' * 40
-    puts "|#{@board[0]}|#{@board[1]}|#{@board[2]}|"
-    puts ' - - -'
-    puts "|#{@board[3]}|#{@board[4]}|#{@board[5]}|"
-    puts ' - - -'
-    puts "|#{@board[6]}|#{@board[7]}|#{@board[8]}|"
-    puts ' - - -'
-    puts '-' * 40
-  end
 end
-
-# test = Gameplay.new
-# test.update_board(3, 'x')
-# test.print_board
-#
-# puts test.who_won
