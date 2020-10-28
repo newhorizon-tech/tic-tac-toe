@@ -11,7 +11,7 @@
 
 ## Live Demo
 
-[Live Demo Link](https://livedemo.com)
+[Live Demo Link](https://tic-tac-toe.newhorizontech.repl.run)
 
 
 ## Getting Started
