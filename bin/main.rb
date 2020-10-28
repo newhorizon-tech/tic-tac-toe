@@ -2,16 +2,14 @@
 require_relative '../lib/player.rb'
 require_relative '../lib/gameplay.rb'
 
+print 'Enter your name player 1: '
+p1_name = gets.chomp
+p1 = Player.new(p1_name, 'x')
 
-  print 'Enter your name player 1: '
-  p1_name = gets.chomp
-  p1 = Player.new(p1_name, 'x')
-
-  puts
-  print 'Enter your name player 2: '
-  p2_name = gets.chomp
-  p2 = Player.new(p2_name, 'o')
-
+puts
+print 'Enter your name player 2: '
+p2_name = gets.chomp
+p2 = Player.new(p2_name, 'o')
 
 def print_player
   puts "Player 1 is #{p1.player_name} and symbol is #{p1.player_symbol}"
@@ -28,13 +26,12 @@ def print_board(input)
   puts ' - - -'
 end
 
-
 print_player
 game_on = true
 game = Gameplay.new
 def who_won
   win = game.who_won
-  game_on = false unless win.zero?  
+  game_on = false unless win.zero?
   if win == 1
     puts 'Player 1 is the winner'
   elsif win == 2
@@ -51,27 +48,25 @@ while game_on
   if turn_valid_p1[0]
     game.update_board(turn_p1, p1.player_symbol)
   else
-    puts "Invalid move"
+    puts 'Invalid move'
     puts turn_valid_p1[1]
   end
 
   puts 'Invalid move' unless valid_move
   print_board(board)
-  who_won 
-  if !game_on 
-    break
-  end
+  who_won
+  break unless game_on
   puts 'Enter your choice (player 2)'
   turn_p2 = gets.chomp.to_i
   turn_valid_p2 = game.valid_move(turn_p2)
   if turn_valid_p2[0]
     game.update_board(turn_p2, p2.player_symbol)
   else
-    puts "Invalid move"
+    puts 'Invalid move'
     puts turn_valid_p2[1]
   end
-  
+
   print_board(game.board)
-  who_won 
-  
+  who_won
+
 end
