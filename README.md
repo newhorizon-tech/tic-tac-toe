@@ -2,7 +2,7 @@
 
 > This an implementation of tic tac toe in ruby using the object oriented approach
 
-![screenshot]("./img/screenshot.png")
+![screenshot](./img/screenshot.png)
 
 ## Built With
 
