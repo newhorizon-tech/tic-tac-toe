@@ -47,7 +47,7 @@ game_on = true
 game = Gameplay.new
 
 def who_won(game, game_on)
-  win = game.who_won
+  win = game.game_status
   game_on = false unless win.zero?
   if win == 1
     puts '-' * 40

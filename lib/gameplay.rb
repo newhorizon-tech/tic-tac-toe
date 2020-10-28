@@ -22,12 +22,7 @@ class Gameplay
     @board[move - 1] = player
   end
 
-  def who_won
-    return_value = 0
-    horizontal = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
-    vertical = [[0, 3, 6], [1, 4, 7], [2, 5, 8]]
-    diagonal = [[0, 4, 8], [2, 4, 6]]
-    winning_combo = [horizontal, vertical, diagonal].flatten(1).freeze
+  def check_winner(winning_combo)
     winning_combo.each do |combo|
       if combo.all? { |position| @board[position].eql? 'x' } # Checking if 'x' has won
         return_value = 1
@@ -37,7 +32,22 @@ class Gameplay
         return return_value
       end
     end
-    return_value = 3 if @board.all? { |element| element.is_a? String } # Checking for a draw
+    0
+  end
+
+  def board_full
+    @board.all? { |element| element.is_a? String }
+  end
+
+  def game_status
+    horizontal = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+    vertical = [[0, 3, 6], [1, 4, 7], [2, 5, 8]]
+    diagonal = [[0, 4, 8], [2, 4, 6]]
+    winning_combo = [horizontal, vertical, diagonal].flatten(1).freeze
+    return_value = check_winner(winning_combo)
+    return return_value unless return_value.zero? # Return if someone has won
+
+    return_value = 3 if board_full # Checking for a draw
 
     return_value
   end
