@@ -70,18 +70,15 @@ while game_on
   puts "Enter your choice, #{play1.player_name} "
   turn_play1 = gets.chomp.to_i
   turn_valid_play1 = game.valid_move(turn_play1)
-  if turn_valid_play1[0]
-    game.update_board(turn_play1, play1.player_symbol)
-  else
+  until turn_valid_play1[0]
     puts 'Invalid move'
     puts turn_valid_play1[1]
-    until turn_valid_play1[0]
-      puts "Enter your choice again, #{play1.player_name}. Make sure it's a valid choice "
-      turn_play1 = gets.chomp.to_i
-      turn_valid_play1 = game.valid_move(turn_play1)
-    end
-    game.update_board(turn_play1, play1.player_symbol) if turn_valid_play1[0]
+    puts "Enter your choice again, #{play1.player_name}. Make sure it's a valid choice "
+    turn_play1 = gets.chomp.to_i
+    turn_valid_play1 = game.valid_move(turn_play1)
   end
+  game.update_board(turn_play1, play1.player_symbol) # if turn_valid_play1[0]
+
   print_board(game.board)
   game_on = who_won(game, game_on)
   break unless game_on
@@ -89,18 +86,15 @@ while game_on
   puts "Enter your choice, #{play2.player_name} "
   turn_play2 = gets.chomp.to_i
   turn_valid_play2 = game.valid_move(turn_play2)
-  if turn_valid_play2[0]
-    game.update_board(turn_play2, play2.player_symbol)
-  else
+  until turn_valid_play2[0]
     puts 'Invalid move'
     puts turn_valid_play2[1]
-    until turn_valid_play2[0]
-      puts "Enter your choice again, #{play2.player_name}. Make sure it's a valid choice "
-      turn_play2 = gets.chomp.to_i
-      turn_valid_play2 = game.valid_move(turn_play2)
-    end
-    game.update_board(turn_play2, play2.player_symbol) if turn_valid_play2[0]
+    puts "Enter your choice again, #{play1.player_name}. Make sure it's a valid choice "
+    turn_play2 = gets.chomp.to_i
+    turn_valid_play2 = game.valid_move(turn_play2)
   end
+  game.update_board(turn_play2, play2.player_symbol) # if turn_valid_play2[0]
+
   print_board(game.board)
   game_on = who_won(game, game_on)
 end
