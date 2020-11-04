@@ -1,29 +1,6 @@
 require_relative '../lib/gameplay.rb'
 require_relative '../lib/player.rb'
 
-# def print_board(board_arr)
-#   input = []
-#   board_arr.each do |x|
-#     if x.is_a? Integer and x.zero?
-#       input.push(' ')
-#     else
-#       input.push(x)
-#     end
-#   end
-#   puts '*' * 40
-#   puts 'Currect state of the game'
-#   puts ' - - -'
-#   puts "|#{input[0]}|#{input[1]}|#{input[2]}|"
-#   puts ' - - -'
-#   puts "|#{input[3]}|#{input[4]}|#{input[5]}|"
-#   puts ' - - -'
-#   puts "|#{input[6]}|#{input[7]}|#{input[8]}|"
-#   puts ' - - -'
-#   puts '*' * 40
-# end
-
-# puts 'RSpec is working!'
-
 describe Gameplay do
   subject { Gameplay.new }
   describe '#initialize' do
@@ -46,7 +23,11 @@ describe Gameplay do
   describe "#update_board" do
     it "updates the board with the given player symbol at the given position" do
       subject.update_board(5, 'x')
-      expect(subject.board[5]).to eq('x')
+      expect(subject.board[4]).to eq('x')
+    end
+    it "updates the board with the given player symbol at the given position" do
+      subject.update_board(7, 'o')
+      expect(subject.board[6]).to eq('o')
     end
   end
 
@@ -111,6 +92,18 @@ describe Gameplay do
 
         expect(subject.game_status).to eq(3)
       end
+    end
+  end
+end
+
+describe Player do
+  subject {Player.new('player1', 'x')}
+  describe "#initialize" do
+    it "initializes player name" do
+      expect(subject.player_name).to eq('player1')
+    end
+    it "initializes player symbol" do
+      expect(subject.player_symbol).to eq('x')
     end
   end
 end
