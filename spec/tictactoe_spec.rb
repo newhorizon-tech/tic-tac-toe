@@ -20,12 +20,12 @@ describe Gameplay do
     end
   end
 
-  describe "#update_board" do
-    it "updates the board with the given player symbol at the given position" do
+  describe '#update_board' do
+    it 'updates the board with the given player symbol at the given position' do
       subject.update_board(5, 'x')
       expect(subject.board[4]).to eq('x')
     end
-    it "updates the board with the given player symbol at the given position" do
+    it 'updates the board with the given player symbol at the given position' do
       subject.update_board(7, 'o')
       expect(subject.board[6]).to eq('o')
     end
@@ -97,12 +97,12 @@ describe Gameplay do
 end
 
 describe Player do
-  subject {Player.new('player1', 'x')}
-  describe "#initialize" do
-    it "initializes player name" do
+  subject { Player.new('player1', 'x') }
+  describe '#initialize' do
+    it 'initializes player name' do
       expect(subject.player_name).to eq('player1')
     end
-    it "initializes player symbol" do
+    it 'initializes player symbol' do
       expect(subject.player_symbol).to eq('x')
     end
   end
