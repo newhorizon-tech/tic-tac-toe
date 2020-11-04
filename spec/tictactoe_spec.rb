@@ -49,8 +49,21 @@ describe Gameplay do
         subject.update_board(1, 'x')
         subject.update_board(2, 'x')
         subject.update_board(3, 'x')
-        # print_board(subject.board)
-        puts subject.game_status
+
+        expect(subject.game_status).to eq(1)
+      end
+      it 'return value is 1 if a player 1 has won vertically' do
+        subject.update_board(1, 'x')
+        subject.update_board(4, 'x')
+        subject.update_board(7, 'x')
+
+        expect(subject.game_status).to eq(1)
+      end
+      it 'return value is 1 if a player 1 has won diagonally' do
+        subject.update_board(1, 'x')
+        subject.update_board(5, 'x')
+        subject.update_board(9, 'x')
+
         expect(subject.game_status).to eq(1)
       end
     end
@@ -59,8 +72,21 @@ describe Gameplay do
         subject.update_board(4, 'o')
         subject.update_board(5, 'o')
         subject.update_board(6, 'o')
-        # print_board(subject.board)
-        puts subject.game_status
+
+        expect(subject.game_status).to eq(2)
+      end
+      it 'return value is 1 if a player 2 has won vertically' do
+        subject.update_board(2, 'o')
+        subject.update_board(5, 'o')
+        subject.update_board(8, 'o')
+
+        expect(subject.game_status).to eq(2)
+      end
+      it 'return value is 1 if a player 2 has won diagonally' do
+        subject.update_board(3, 'o')
+        subject.update_board(5, 'o')
+        subject.update_board(7, 'o')
+
         expect(subject.game_status).to eq(2)
       end
     end
@@ -75,8 +101,7 @@ describe Gameplay do
         subject.update_board(4, 'x')
         subject.update_board(5, 'o')
         subject.update_board(6, 'x')
-        print_board(subject.board)
-        puts subject.game_status
+
         expect(subject.game_status).to eq(3)
       end
     end
