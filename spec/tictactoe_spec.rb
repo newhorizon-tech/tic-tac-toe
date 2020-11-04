@@ -1,28 +1,28 @@
 require_relative '../lib/gameplay.rb'
 require_relative '../lib/player.rb'
 
-def print_board(board_arr)
-  input = []
-  board_arr.each do |x|
-    if x.is_a? Integer and x.zero?
-      input.push(' ')
-    else
-      input.push(x)
-    end
-  end
-  puts '*' * 40
-  puts 'Currect state of the game'
-  puts ' - - -'
-  puts "|#{input[0]}|#{input[1]}|#{input[2]}|"
-  puts ' - - -'
-  puts "|#{input[3]}|#{input[4]}|#{input[5]}|"
-  puts ' - - -'
-  puts "|#{input[6]}|#{input[7]}|#{input[8]}|"
-  puts ' - - -'
-  puts '*' * 40
-end
+# def print_board(board_arr)
+#   input = []
+#   board_arr.each do |x|
+#     if x.is_a? Integer and x.zero?
+#       input.push(' ')
+#     else
+#       input.push(x)
+#     end
+#   end
+#   puts '*' * 40
+#   puts 'Currect state of the game'
+#   puts ' - - -'
+#   puts "|#{input[0]}|#{input[1]}|#{input[2]}|"
+#   puts ' - - -'
+#   puts "|#{input[3]}|#{input[4]}|#{input[5]}|"
+#   puts ' - - -'
+#   puts "|#{input[6]}|#{input[7]}|#{input[8]}|"
+#   puts ' - - -'
+#   puts '*' * 40
+# end
 
-puts 'RSpec is working!'
+# puts 'RSpec is working!'
 
 describe Gameplay do
   subject { Gameplay.new }
@@ -40,6 +40,13 @@ describe Gameplay do
     it 'returns false as the first element of an array if number more than nine' do
       return_value = subject.valid_move(10)
       expect(return_value[0]).to eq(false)
+    end
+  end
+
+  describe "#update_board" do
+    it "updates the board with the given player symbol at the given position" do
+      subject.update_board(5, 'x')
+      expect(subject.board[5]).to eq('x')
     end
   end
 
